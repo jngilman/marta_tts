@@ -2,18 +2,19 @@
 
 <h2>you are currently at.. </h2>
 
-<p><%= @location.my_location %></p>
+<p><%= @location.full_street_address %></p>
 
 
-<h3>The closest busses are ....</h3>
+<h3>The closest buses are ....</h3>
 
 <% if @bus_count == 0 %>
-  <p>There are no busses around you. You may consider Lyft or Uber</p>
- <% else %>
-  <strong>Route</strong> <%= bus["ROUTE"] %><br>
-  <strong>Vehicle</strong> <%= bus["VEHICLE"] %><br>
-  <strong>Next Stop</strong> <%= bus["TIMEPOINT"] %><br>
-
+  <p>There are no buses around you. You may consider Lyft or Uber</p>
+<% else %>
+ <% @nearby_buses.each do |bus| %>
+  <strong>Route</strong> <%= bus["ROUTE"] %><br/>
+  <strong>Vehicle</strong> <%= bus["VEHICLE"] %><br/>
+  <strong>Next Stop</strong> <%= bus["TIMEPOINT"] %><br/>
+ <% end %>
 <% end %>
 
 <p>
@@ -26,15 +27,7 @@
   <%= @location.longitude %>
 </p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @location.address %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @location.city %>
-</p>
-
-<%= link_to 'Actually, I\'m at...' at, edit_location_path(@location) %> |
+<br>
+<%= link_to 'Actually, I\'m at...', edit_location_path(@location) %> |
 <%= link_to 'Back', locations_path %>
+
