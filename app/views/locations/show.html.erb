@@ -1,5 +1,21 @@
 <p id="notice"><%= notice %></p>
 
+<h2>you are currently at.. </h2>
+
+<p><%= @location.my_location %></p>
+
+
+<h3>The closest busses are ....</h3>
+
+<% if @bus_count == 0 %>
+  <p>There are no busses around you. You may consider Lyft or Uber</p>
+ <% else %>
+  <strong>Route</strong> <%= bus["ROUTE"] %><br>
+  <strong>Vehicle</strong> <%= bus["VEHICLE"] %><br>
+  <strong>Next Stop</strong> <%= bus["TIMEPOINT"] %><br>
+
+<% end %>
+
 <p>
   <strong>Latitude:</strong>
   <%= @location.latitude %>
@@ -20,5 +36,5 @@
   <%= @location.city %>
 </p>
 
-<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Actually, I\'m at...' at, edit_location_path(@location) %> |
 <%= link_to 'Back', locations_path %>
